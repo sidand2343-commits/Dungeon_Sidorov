@@ -1,0 +1,33 @@
+# --- CLion и IDE ---
+.idea/
+*.iml
+*.swp
+*.swo
+*~
+
+# --- CMake и сборка ---
+cmake-build-debug/
+cmake-build-release/
+build/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.ninja
+build.ninja
+
+# --- Компилятор и объектные файлы (C++) ---
+*.o
+*.obj
+*.exe
+*.out
+*.app
+*.dll
+*.so
+*.dylib
+*.pdb
+
+# --- Лог-файлы и системный мусор ---
+*.log
+.DS_Store
+Thumbs.db
