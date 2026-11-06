@@ -1,15 +1,43 @@
 #ifndef GAME_H
 #define GAME_H
 
-enum CommandResult {
-    CMD_CONTINUE_NO_MOVE = 0,
-    CMD_CONTINUE_MOVE      = 1,
-    CMD_QUIT               = 2
+#include <string>
+#include "map.h"
+#include "hero.h"
+
+enum class CommandResult {
+    CONTINUE_NO_MOVE,
+    CONTINUE_MOVE,
+    QUIT
 };
 
-void print_welcome(void);
-void print_map(void);
-void print_help(void);
-int  process_command(const char *command);
+class Game {
+public:
+    // Конструктор загрузки уровня из файла
+    explicit Game(const std::string& map_filename);
 
-#endif /* GAME_H */
+    // Конструктор с размерами (для тестов)
+    Game(int map_width, int map_height);
+
+    // Деструктор по умолчанию — RAII сам освободит Map и Hero
+    ~Game() = default;
+
+    // Запрет копирования
+    Game(const Game&) = delete;
+    Game& operator=(const Game&) = delete;
+
+    // Главный цикл
+    void run();
+
+private:
+    CommandResult process_command(const std::string& command);
+    void print_welcome() const;
+    void print_help() const;
+
+    Map  map_;
+    Hero hero_;
+    int  move_counter_;
+    bool is_playing_;
+};
+
+#endif
